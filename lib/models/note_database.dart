@@ -35,7 +35,7 @@ class NoteDatabase extends ChangeNotifier {
     final existingNote = await isar.notes.get(id);
     if (existingNote != null) {
       existingNote.text = newText;
-      await isar.notes.put(existingNote);
+      await isar.writeTxn(() => isar.notes.put(existingNote));
       await fetchNotes();
     }
   }
