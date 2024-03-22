@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:notes/components/drawer.dart';
 import 'package:notes/models/note_database.dart';
 import 'package:provider/provider.dart';
 
@@ -83,8 +84,11 @@ class _NotesPageState extends State<NotesPage> {
         backgroundColor: Colors.transparent,
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
-      drawer: const Drawer(),
+      drawer: const MyDrawer(),
       floatingActionButton: FloatingActionButton(
+        foregroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Theme.of(context).colorScheme.background,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
         onPressed: () {
           createNote();
         },
