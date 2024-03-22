@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:notes/components/drawer.dart';
+import 'package:notes/components/note_tile.dart';
 import 'package:notes/models/note_database.dart';
 import 'package:provider/provider.dart';
 
@@ -20,6 +21,7 @@ class _NotesPageState extends State<NotesPage> {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
+              title: const Text('New Note'),
               content: TextField(
                 controller: _textController,
               ),
@@ -87,7 +89,7 @@ class _NotesPageState extends State<NotesPage> {
       drawer: const MyDrawer(),
       floatingActionButton: FloatingActionButton(
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
         onPressed: () {
           createNote();
@@ -110,23 +112,11 @@ class _NotesPageState extends State<NotesPage> {
                 itemCount: currentNotes.length,
                 itemBuilder: (context, index) {
                   final note = currentNotes[index];
-                  return ListTile(
-                    title: Text(note.text),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                            onPressed: () {
-                              update(note);
-                            },
-                            icon: const Icon(Icons.edit)),
-                        IconButton(
-                            onPressed: () {
-                              deleteNote(note.id);
-                            },
-                            icon: const Icon(Icons.delete))
-                      ],
-                    ),
+
+                  return NoteTile(
+                    text: note.text,
+                    editPressed: () => update(note),
+                    deletePressed: () => deleteNote(note.id),
                   );
                 }),
           ),

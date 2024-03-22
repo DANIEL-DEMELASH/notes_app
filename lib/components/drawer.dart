@@ -11,7 +11,10 @@ class MyDrawer extends StatelessWidget {
       backgroundColor: Theme.of(context).colorScheme.background,
       child: Column(
         children: [
-          const DrawerHeader(child: Icon(Icons.note)),
+          const DrawerHeader(child: Icon(Icons.edit)),
+          const SizedBox(
+            height: 25,
+          ),
           DrawerTile(
               title: 'Notes',
               leading: Icon(Icons.home,
